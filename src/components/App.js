@@ -2,15 +2,24 @@ import React, { useState } from "react";
 import './../styles/App.css';
 
 const App = () => {
-  let [name,setName] = useState('')
+  const [name, setName] = useState('');
+  const handleNameChange = (event) => {
+    setNmae(event.target.value);
+  };
   return (
-    <div id="main">
-        {/* Do not remove the main div */}
-        <p>Enter your name:</p>
-        <input onChange={(e)=>(setName(e.target.value))}></input>
-        {
-          name && <p>Hello {name}!</p>
-        }
+    <div>
+         <h2>Enter your name:</h2>
+    <label>
+        <input>
+           type="text"
+           value={name}
+             onChange={handleNameChange}
+               placeholder="Enter your name"
+                 />
+                 </label>
+  {name && (
+    <p>Hello {name} !</p>
+    )}
     </div>
   )
 }
