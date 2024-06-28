@@ -1,20 +1,29 @@
-import React, { useState } from "react";
 import './../styles/App.css';
 
-const App = () => {
-  const [text, setText] = useState("");
+import React ,{useState, useEffect} from 'react';
 
+const App = () => {
+  const [weatherInput, setWeatherInput] =useState({ temperature: 25, conditions: "Sunny" });
+  const [textColor, setTextColor] = useState("blue");
+  useEffect(() => {
+    // Set text color based on temperature threshold
+    if (weatherInput.temperature > 20) {
+      setTextColor("red");
+    } else {
+      setTextColor("blue");
+    }
+  }, [weatherInput.temperature]);
+ 
   return (
     <div>
-      <label htmlFor="name">Enter your name:</label>
-      <input 
-        type="text" 
-        id="name" 
-        onChange={e => setText(e.target.value)} 
-      />
-     <p>{text && text.length>0?"Hello "+ text+"!":""}</p>
+        {/* Do not remove the main div */}
+       <div style ={{color:textColor}}>
+        <p>Temperature: {weatherInput.temperature}</p>
+        <p>Conditions: {weatherInput.conditions}</p>
+       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+
+export default App
